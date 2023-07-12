@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.1.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.ogrowth</groupId>
+    <artifactId>licensing-service</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>licensing-service</name>
+    <description>licensing-service</description>
+    <properties>
+        <java.version>17</java.version>
+        <docker.image.prefix>ogrowth</docker.image.prefix>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-spring-boot3 -->
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-spring-boot3</artifactId>
+            <version>2.0.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-circuitbreaker -->
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-circuitbreaker</artifactId>
+            <version>2.0.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-retry -->
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-retry</artifactId>
+            <version>2.0.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-timelimiter -->
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-timelimiter</artifactId>
+            <version>2.0.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-ratelimiter -->
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-ratelimiter</artifactId>
+            <version>2.0.2</version>
+            </dependency>
+        <!-- https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-bulkhead -->
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-bulkhead</artifactId>
+            <version>2.0.2</version>
+            </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+            <version>3.0.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                    <image>
+                        <name>${docker.image.prefix}/${project.artifactId}:latest</name>
+<!--                        <buildpacks>-->
+<!--                            <buildpack>gcr.io/paketo-buildpacks/graalvm</buildpack>-->
+<!--                            <buildpack>gcr.io/paketo-buildpacks/java-native-image</buildpack>-->
+<!--                        </buildpacks>-->
+<!--                        <env>-->
+<!--                            <BP_JVM_VERSION>19.0.2</BP_JVM_VERSION>-->
+<!--                            <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>-->
+<!--                        </env>-->
+
+                    </image>
+                </configuration>
+            </plugin>
+<!--            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.13</version>
+                <configuration>
+                    <repository>${docker.image.prefix}/${project.artifactId}</repository>
+                    <tag>${project.version}</tag>
+                    <buildArgs>
+                        <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                    </buildArgs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>build</goal>
+                            <goal>push</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin> -->
+        </plugins>
+    </build>
+
+</project>

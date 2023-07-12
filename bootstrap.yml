@@ -1,0 +1,28 @@
+resilinece4j.bulkhead:
+  instances:
+    bulkHeadLicenseService:
+      maxConcurrentCalls: 10
+      maxWaitDuration: 10ms
+
+resilinece4j.thread-pool-bulkhead:
+  instances:
+    bulkHeadLicenseService:
+      maxThreadPoolSize: 1
+      coreThreadPoolSize: 1
+      queueCapacity: 1
+      keepAliveDuration: 20ms
+
+resilinece4j.retry:
+  instances:
+    retryLicenseService:
+      maxRetryAttempts: 5
+      waitDuration: 10000
+      retryExceptions:
+        - java.util.concurrent.TimeoutException
+
+resilinece4j.ratelimiter:
+  instances:
+     licenseService:
+      limitForPeriod: 1
+      limitRefreshPeriod: 1s
+      timeoutDuration: 1s

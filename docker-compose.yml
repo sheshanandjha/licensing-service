@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  licensingservice:
+    image: ogrowth/licensing-service:0.0.1-SNAPSHOT
+    ports:
+      - "8282:8282"
+    environment:
+       - "SPRING_PROFILES_ACTIVE=dev"
